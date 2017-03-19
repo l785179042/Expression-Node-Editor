@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test 02</title>
+	<style type="text/css" media="screen">
+		svg{
+			width: 800px;
+			height:500px;
+			background: #162042;
+			border-radius: 10px;
+		}
+	</style>
+</head>
+<body>
+	<svg id = "svg" viewBox = "0 0 100% 100% " preserveAspectRatio = "xMaxYMax meet">
+			<rect x = "100px" y = "100px" width = "200px" height = "100px" fill = "#C5B323"></rect>
+			<rect x = "500px" y = "300px" width = "200px" height = "100px" fill = "#C5B323"></rect>
+			<rect id="viewBoxIndicator" stroke="red" stroke-width="3.5" fill="none" />
+	</svg>
+</body>
+<script type="text/javascript">
+	oSvg = document.getElementById("svg");
+	oSvg.addEventListener("mousewheel",function(e){
+		var oArray = oSvg.getAttribute("viewBox").split(" ");
+		var vw = oArray[2]-16*(e.wheelDelta)/120;
+		var vh = oArray[3]-10*(e.wheelDelta)/120;
+		oSvg.setAttribute("viewBox",oArray[0] + " " + oArray[1] + " " + vw + " " + vh);
+	});	
+	oSvg.addEventListener("mousedown",function(e){
+		if(e.button == 1)
+		{
+			var x = e.clientX;
+			var y = e.clientY;
+			var oArray = oSvg.getAttribute("viewBox").split(" ");
+			document.onmousemove = function(e){
+				var cx = e.clientX - x;
+				var cy = e.clientY - y;
+				var vx = oArray[0] - cx;
+				var vy = oArray[1] - cy;
+				oSvg.setAttribute("viewBox", vx+" "+vy+" "+oArray[2]+" "+oArray[3]);
+			}
+			document.onmouseup = function(){
+				this.onmousemove = null;
+				this.onmouseup = null;
+			}
+		}
+	});
+</script>
+</html>

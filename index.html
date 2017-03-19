@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Expression Node Editor</title>
+	<script src = "data.js" type="text/javascript" charset="utf-8"></script>
+	<script src = "node.js" type="text/javascript" charset="utf-8"></script>
+	<script src="tool.js" type="text/javascript" charset="utf-8"></script>
+	<script src="index.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id = "toolbox">
+		<h1>Expression Node Editor</h1>
+		<h2>CREATE</h2>
+		<form id="create-node">
+            <button id = "create" type="button" >Create</button>
+            <button id = "addition" type="button" >Addition</button>
+            <button id = "delete" type="button">Delete</button>
+        </form>
+        <h2 >EXPRESSION</h2>
+		<form id="expression">
+			<button id = "generate" type="button">Generate</button>
+			<button id = "clear" type="button">ClearAll</button>
+		</form>
+		<h2>ATTRIBUTES</h2>
+		<div id = "attributes">
+			<div class = "panel">
+				
+			</div>
+		</div>
+			
+	</div>
+
+
+	<div id="canvas">
+
+	</div>
+
+
+	<div id = "property">
+		<input id = "editText" type="text" value="Displays the current selected node name." readOnly="true"/>
+	</div>
+
+	<div id = "menu" class="menu">
+		<ul>
+			<li sm = "go_menu" class="ar">Global objects</li>
+			<li sm = "tc_menu" class="ar">Time conversion</li>
+			<li sm = "vm_menu" class="ar">Vector Math</li>
+			<li sm = "rn_menu" class="ar">Random Numbers</li>
+			<li sm = "ip_menu" class="ar">Interpolation</li>
+			<li sm = "cc_menu" class="ar">Color Conversion</li>
+			<li sm = "om_menu" class="ar">Other Math</li>
+			<li sm = "co_menu" class="ar">Comp</li>
+			<li sm = "fo_menu" class="ar">Footage</li>
+			<li sm = "lr_menu" class="ar">Layer</li>
+			<li sm = "ca_menu" class="ar">Camera</li>
+			<li sm = "li_menu" class="ar">Light</li>
+			<li sm = "ef_menu" class="ar">Effect</li>
+			<li sm = "ma_menu" class="ar">Mask</li>
+			<li sm = "pr_menu" class="ar">Property</li>
+			<li sm = "ky_menu" class="ar">Key</li>
+			<li sm = "mk_menu" class="ar">MarkerKey</li>
+			<li sm = "jm_menu" class="ar">JavaScript Math</li>
+			<li sm = "ot_menu" class="ar">Others</li>
+		</ul>
+	</div>
+
+
+	<div id = "go_menu" class="menu">
+		<ul>
+			<li>comp</li>
+			<li>footage</li>
+			<li>thisComp</li>
+			<li>thisLayer</li>
+			<li>thisProperty</li>
+			<li>time</li>
+			<li>colorDepth</li>
+			<li>posterizeTime</li>
+			<li>value</li>
+		</ul>
+	</div>
+	<div id = "tc_menu" class="menu">
+		<ul>
+			<li>timeToFrames</li>
+			<li>framesToTime</li>
+			<li>timeToTimecode</li>
+			<li>timeToNTSCTimecode</li>
+			<li>timeToFeetAndFrames</li>
+			<li>timeToCurrentFormat</li>
+		</ul>
+	</div>
+	<div id = "vm_menu" class="menu">
+		<ul>
+			<li>add</li>
+			<li>sub</li>
+			<li>mul</li>
+			<li>div</li>
+			<li>clamp</li>
+			<li>dot</li>
+			<li>cross</li>
+			<li>normalize</li>
+			<li>length</li>
+			<li>lookAt</li>
+		</ul>
+	</div>
+	<div id = "rn_menu" class="menu">
+		<ul>
+			<li>seedRandom</li>
+			<li>random</li>
+			<li>gaussRandom</li>
+			<li>noise</li>
+		</ul>
+	</div>
+	<div id = "ip_menu" class = "menu">
+		<ul>
+			<li>linear</li>
+			<li>ease</li>
+			<li>easeIn</li>
+			<li>easeOut</li>
+		</ul>
+	</div>
+	<div id = "cc_menu" class = "menu">
+		<ul>
+			<li>rgbToHsl</li>
+			<li>hslToRgb</li>
+		</ul>
+	</div>
+	<div id = "om_menu" class = "menu">
+		<ul>
+			<li>degreesToRadians</li>
+			<li>radiansToDegrees</li>
+		</ul>
+	</div>
+	<div id = "co_menu" class = "menu">
+		<ul>
+			<li>layer</li>
+			<li>marker</li>
+			<li>numLayers</li>
+			<li>activeCamera</li>
+			<li>width</li>
+			<li>height</li>
+			<li>duration</li>
+			<li>ntscDropFrame</li>
+			<li>displayStartTime</li>
+			<li>frameDuration</li>
+			<li>shutterAngle</li>
+			<li>shutterPhase</li>
+			<li>bgColor</li>
+			<li>pixelAspect</li>
+			<li>name</li>
+		</ul>
+	</div>
+	<div id = "fo_menu" class = "menu">
+		<ul>
+			<li>width</li>
+			<li>height</li>
+			<li>duration</li>
+			<li>ntscDropFrame</li>
+			<li>pixelAspect</li>
+			<li>name</li>
+		</ul>
+	</div>
+	<div id = "lr_menu" class = "menu">
+		<ul>
+			<li ssm = "lr_s_menu" class="ar">Sub-objects</li>
+			<li ssm = "lr_g_menu" class="ar">General</li>
+			<li ssm = "lr_p_menu" class="ar">Properties</li>
+			<li ssm = "lr_3_menu" class="ar">3D</li>
+			<li ssm = "lr_t_menu" class="ar">Space Transforms</li>
+		</ul>
+	</div>
+	<div id = "ca_menu" class = "menu">
+		<ul>
+			<li>pointOfInterest</li>
+			<li>zoom</li>
+			<li>depthOfField</li>
+			<li>focusDistance</li>
+			<li>aperture</li>
+			<li>blurLevel</li>
+			<li>active</li>
+		</ul>
+	</div>
+	<div id = "li_menu" class = "menu">
+		<ul>
+			<li>pointOfInterest</li>
+			<li>intensity</li>
+			<li>color</li>
+			<li>coneFeather</li>
+			<li>shadowDarkness</li>
+			<li>shadowDiffusion</li>
+		</ul>
+	</div>
+	<div id = "ef_menu" class = "menu">
+		<ul>
+			<li>active</li>
+			<li>param</li>
+			<li>name</li>
+		</ul>
+	</div>
+	<div id = "ma_menu" class = "menu">
+		<ul>
+			<li>maskOpacity</li>
+			<li>maskFeather</li>
+			<li>maskExpansion</li>
+			<li>invert</li>
+		</ul>
+	</div>
+	<div id = "pr_menu" class = "menu">
+		<ul>
+			<li>value</li>
+			<li>valueAtTime</li>
+			<li>velocity</li>
+			<li>velocityAtTime</li>
+			<li>speed</li>
+			<li>speedAtTime</li>
+			<li>wiggle</li>
+			<li>temporalWiggle</li>
+			<li>smooth</li>
+			<li>loopIn</li>
+			<li>loopOut</li>
+			<li>loopInDuration</li>
+			<li>loopOutDuration</li>
+			<li>key</li>
+			<li>nearestKey</li>
+			<li>numKeys</li>
+			<li>propertyGroup</li>
+			<li>propertyIndex</li>
+			<li>name</li>
+		</ul>
+	</div>
+	<div id = "ky_menu" class="menu">
+		<ul>
+			<li>value</li>
+			<li>time</li>
+			<li>index</li>
+		</ul>
+	</div>
+	<div id = "mk_menu" class="menu">
+		<ul>
+			<li>duration</li>
+			<li>comment</li>
+			<li>chapter</li>
+			<li>url</li>
+			<li>frameTarget</li>
+			<li>eventCuePoint</li>
+			<li>cuePointName</li>
+			<li>parameters</li>
+		</ul>
+	</div>
+	<div id = "jm_menu" class = "menu">
+		<ul>
+			<li>Math.cos</li>
+			<li>Math.acos</li>
+			<li>Math.tan</li>
+			<li>Math.atan</li>
+			<li>Math.atan2</li>
+			<li>Math.sin</li>
+			<li>Math.sqrt</li>
+			<li>Math.exp</li>
+			<li>Math.pow</li>
+			<li>Math.log</li>
+			<li>Math.abs</li>
+			<li>Math.round</li>
+			<li>Math.ceil</li>
+			<li>Math.floor</li>
+			<li>Math.min</li>
+			<li>Math.max</li>
+			<li>Math.PI</li>
+			<li>Math.E</li>
+			<li>Math.LOG2E</li>
+			<li>Math.LOG10E</li>
+			<li>Math.LN2</li>
+			<li>Math.LN10</li>
+			<li>Math.SQRT2</li>
+			<li>Math.SQRT1_2</li>
+		</ul>
+	</div>
+	<div id = "ot_menu" class = "menu">
+		<ul>
+			<li>Condition</li>
+			<li>Math</li>
+			<li>Constant</li>
+		</ul>
+	</div>
+
+	<div id = "lr_s_menu" class = "menu">
+		<ul>
+			<li>source</li>
+			<li>sourceTime</li>
+			<li>effect</li>
+			<li>mask</li>
+		</ul>
+	</div>
+	<div id = "lr_g_menu" class = "menu">
+		<ul>
+			<li>width</li>
+			<li>height</li>
+			<li>index</li>
+			<li>parent</li>
+			<li>hasParent</li>
+			<li>inPoint</li>
+			<li>outPoint</li>
+			<li>startTime</li>
+			<li>hasVideo</li>
+			<li>hasAudio</li>
+			<li>active</li>
+			<li>enabled</li>
+			<li>audioActive</li>
+			<li>sampleImage</li>
+		</ul>
+	</div>
+	<div id = "lr_p_menu" class = "menu">
+		<ul>
+			<li>anchorPoint</li>
+			<li>position</li>
+			<li>scale</li>
+			<li>rotation</li>
+			<li>opacity</li>
+			<li>audioLevels</li>
+			<li>timeRemap</li>
+			<li>marker</li>
+			<li>name</li>
+		</ul>
+	</div>
+	<div id = "lr_3_menu" class = "menu">
+		<ul>
+			<li>orientation</li>
+			<li>rotationX</li>
+			<li>rotationY</li>
+			<li>rotationZ</li>
+			<li>lightTransmission</li>
+			<li>castsShadows</li>
+			<li>acceptsShadows</li>
+			<li>acceptsLights</li>
+			<li>ambient</li>
+			<li>diffuse</li>
+			<li>specular</li>
+			<li>shininess</li>
+			<li>metal</li>
+		</ul>
+	</div>
+	<div id = "lr_t_menu" class = "menu">
+		<ul>
+			<li>toComp</li>
+			<li>fromComp</li>
+			<li>toWorld</li>
+			<li>fromWorld</li>
+			<li>toCompVec</li>
+			<li>fromCompVec</li>
+			<li>toWorldVec</li>
+			<li>fromWorldVec</li>
+			<li>fromCompToSurface</li>
+		</ul>
+	</div>
+	
+</body>
+</html>
